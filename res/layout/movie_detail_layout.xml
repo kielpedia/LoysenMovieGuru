@@ -2,6 +2,7 @@
 <ScrollView 
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:droidfu="http://github.com/droidfu/schema"
+	xmlns:sublist="http://schemas.android.com/apk/res/com.loysen.MovieGuru.activity"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 	<RelativeLayout
@@ -50,6 +51,34 @@
 	  		android:layout_toRightOf="@id/audienceDetailLabel"
 	  		android:layout_toLeftOf="@+id/detailImage"/>
 	  		
+	  	<TextView android:id="@+id/yearDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/audienceDetailLabel"
+	  		android:text="Year: "
+	  		/>
+	  	
+	  	<TextView android:id="@+id/yearDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_alignTop="@id/yearDetailLabel"
+	  		android:layout_toRightOf="@id/yearDetailLabel"
+	  		/>
+	  		
+	  	<TextView android:id="@+id/genreDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/yearDetailLabel"
+	  		android:text="Genre: "
+	  		/>
+	  	
+	  	<TextView android:id="@+id/genreDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/genreDetailLabel"
+	  		android:layout_toRightOf="@id/genreDetailLabel"
+	  		/>
+	  			
 		<com.github.droidfu.widgets.WebImageView android:id="@id/detailImage"
 		  	android:layout_width="120dip"
 		    android:layout_height="180dip"
@@ -69,32 +98,19 @@
 	  		android:layout_height="wrap_content"
 	  		android:layout_below="@id/synopsisDetailLabel"/>	   
 	  		
-	  	<TextView android:id="@+id/infoDetailLabel"
+	  	<com.loysen.MovieGuru.components.SubListPod android:id="@+id/castDetailPod"
 	  		android:layout_width="match_parent"
 	  		android:layout_height="wrap_content"
 	  		android:layout_below="@id/synopsisDetailText"
-	  		android:text="Movie Info:"
-	  		android:background="@drawable/divider"/>
+	  		sublist:header_text="Cast and Crew"
+	  		/>
 	  		
-	  	<TextView android:id="@+id/yearDetailLabel"
-	  		android:layout_width="wrap_content"
-	  		android:layout_height="wrap_content"
-	  		android:layout_below="@id/infoDetailLabel"
-	  		android:text="Year: "
-	  		/>
-	  	
-	  	<TextView android:id="@+id/yearDetailText"
-	  		android:layout_width="wrap_content"
-	  		android:layout_height="wrap_content"
-	  		android:layout_below="@id/infoDetailLabel"
-	  		android:layout_toRightOf="@id/yearDetailLabel"
-	  		/>
-	  	
-	  	<com.loysen.MovieGuru.components.CastPod android:id="@+id/castDetailPod"
+	  	<com.loysen.MovieGuru.components.SubListPod android:id="@+id/directorDetailPod"
 	  		android:layout_width="match_parent"
 	  		android:layout_height="wrap_content"
-	  		android:layout_below="@id/yearDetailLabel"
-	  		/>
+	  		android:layout_below="@id/castDetailPod"
+	  		sublist:header_text="Director(s)"
+	  		/>	
 	  		
 	</RelativeLayout>
 </ScrollView>

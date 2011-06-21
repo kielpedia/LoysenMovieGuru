@@ -25,7 +25,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie>  implements OnItemLon
 		
 		this.movieList = objects;
 		this.selectedPosition = Adapter.NO_SELECTION;
-		// TODO Auto-generated constructor stub
+		this.selectedMovie = null;
 	}
 	
 	public int getSelectedPostion() {

@@ -14,6 +14,7 @@ public class MovieItemView extends RelativeLayout {
 	private TextView titleText;
 	private TextView criticText;
 	private TextView audienceText;
+	private TextView genreText;
 	private WebImageView imageView;
 	
 	public MovieItemView(Context context) {
@@ -26,6 +27,7 @@ public class MovieItemView extends RelativeLayout {
 		titleText = (TextView) this.findViewById(R.id.titleText);
 		criticText = (TextView) this.findViewById(R.id.criticText);
 		audienceText = (TextView) this.findViewById(R.id.audienceText);
+		genreText = (TextView) this.findViewById(R.id.genreItemText);
 		
 		imageView = (WebImageView) this.findViewById(R.id.webImage);
 	}
@@ -34,6 +36,17 @@ public class MovieItemView extends RelativeLayout {
 		titleText.setText(movie.getTitle());
 		criticText.setText(movie.getRatings().getCritics_score() + "%");
 		audienceText.setText(movie.getRatings().getAudience_score() + "%");
+		
+		if(movie.getGenres() != null) {
+			String genreLabel = "";
+			for(String genre : movie.getGenres()) {
+				if(!genreLabel.equals(""))
+					genreLabel += " | ";
+				genreLabel += genre;
+			} 
+			genreText.setText(genreLabel);
+		}
+		
 		imageView.setImageUrl(movie.getPosters().getThumbnail());
 		imageView.loadImage();
 	}

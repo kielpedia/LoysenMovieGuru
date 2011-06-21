@@ -1,16 +1,20 @@
 package com.loysen.MovieGuru.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Movie implements Serializable{
 	
 	private long id;
 	private String title;
 	private long year;
-	//private double runtime;
+//	private Integer runtime;
 	private String synopsis;
 	private Ratings ratings;
 	private Posters posters;
+	private List<Cast> abridged_cast;
+	private List<Cast> abridged_directors;
+	private List<String> genres;
 	
 	public long getId() {
 		return id;
@@ -30,10 +34,10 @@ public class Movie implements Serializable{
 	public void setYear(long year) {
 		this.year = year;
 	}
-//	public double getRuntime() {
+//	public Integer getRuntime() {
 //		return runtime;
 //	}
-//	public void setRuntime(double runtime) {
+//	public void setRuntime(Integer runtime) {
 //		this.runtime = runtime;
 //	}
 	public String getSynopsis() {
@@ -53,6 +57,24 @@ public class Movie implements Serializable{
 	}
 	public void setPosters(Posters posters) {
 		this.posters = posters;
+	}
+	public void setAbridged_cast(List<Cast> abridged_cast) {
+		this.abridged_cast = abridged_cast;
+	}
+	public List<Cast> getAbridged_cast() {
+		return abridged_cast;
+	}
+	public void setAbridged_directors(List<Cast> abridged_directors) {
+		this.abridged_directors = abridged_directors;
+	}
+	public List<Cast> getAbridged_directors() {
+		return abridged_directors;
+	}
+	public void setGenres(List<String> genres) {
+		this.genres = genres;
+	}
+	public List<String> getGenres() {
+		return genres;
 	}
 	
 }
