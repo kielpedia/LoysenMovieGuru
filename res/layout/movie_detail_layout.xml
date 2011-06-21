@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:droidfu="http://github.com/droidfu/schema"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<RelativeLayout
+	  android:layout_width="match_parent"
+	  android:layout_height="match_parent"
+	  android:padding="5px">
+	  
+	  	<TextView android:id="@+id/titleDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_alignParentTop="true"
+	  		android:layout_alignParentLeft="true"
+	  		android:text="Title: "
+	  		/>
+	  	<TextView android:id="@+id/titleDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_toRightOf="@id/titleDetailLabel"
+	  		android:layout_toLeftOf="@+id/detailImage"/>
+	  		
+	  	<TextView android:id="@+id/criticDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/titleDetailText"
+	  		android:layout_alignParentLeft="true"
+	  		android:text="Critics: "
+	  		/>
+	  	<TextView android:id="@+id/criticDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_toRightOf="@id/criticDetailLabel"
+	  		android:layout_alignTop="@id/criticDetailLabel"
+	  		android:layout_toLeftOf="@+id/detailImage"/>
+	  		
+	  	<TextView android:id="@+id/audienceDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/criticDetailText"
+	  		android:layout_alignParentLeft="true"
+	  		android:text="Audience: "
+	  		/>
+	  	<TextView android:id="@+id/audienceDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_alignTop="@id/audienceDetailLabel"
+	  		android:layout_toRightOf="@id/audienceDetailLabel"
+	  		android:layout_toLeftOf="@+id/detailImage"/>
+	  		
+		<com.github.droidfu.widgets.WebImageView android:id="@id/detailImage"
+		  	android:layout_width="120dip"
+		    android:layout_height="180dip"
+		    droidfu:autoLoad="true"
+		    android:layout_alignParentRight="true"
+		    android:layout_alignParentTop="true"
+		  	/>
+	  	
+	  	<TextView android:id="@+id/synopsisDetailLabel"
+			android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/detailImage"
+	  		android:text="Synopsis:"/>
+	  	
+	  	<TextView android:id="@+id/synopsisDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/synopsisDetailLabel"/>	   
+	  		
+	  	<TextView android:id="@+id/infoDetailLabel"
+	  		android:layout_width="match_parent"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/synopsisDetailText"
+	  		android:text="Movie Info:"
+	  		android:background="@drawable/divider"/>
+	  		
+	  	<TextView android:id="@+id/yearDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/infoDetailLabel"
+	  		android:text="Year: "
+	  		/>
+	  	
+	  	<TextView android:id="@+id/yearDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/infoDetailLabel"
+	  		android:layout_toRightOf="@id/yearDetailLabel"
+	  		/>
+	  	
+	  	<com.loysen.MovieGuru.components.CastPod android:id="@+id/castDetailPod"
+	  		android:layout_width="match_parent"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/yearDetailLabel"
+	  		/>
+	  		
+	</RelativeLayout>
+</ScrollView>
