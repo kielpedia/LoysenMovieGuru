@@ -30,11 +30,13 @@ public class CastItemView extends LinearLayout {
 		
 		String characterList = "";
 		
-		for (String character : cast.getCharacters()) {
-			
-			if(!characterList.equals("")) 
-				characterList += " | ";
-			characterList += character;
+		if(cast.getCharacters() != null) {
+			for (String character : cast.getCharacters()) {
+				
+				if(!characterList.equals("")) 
+					characterList += " | ";
+				characterList += character;
+			}
 		}
 		
 		castCharacterText.setText(characterList);

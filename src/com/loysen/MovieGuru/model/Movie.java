@@ -8,13 +8,14 @@ public class Movie implements Serializable{
 	private long id;
 	private String title;
 	private long year;
-//	private Integer runtime;
+	private String runtime;
 	private String synopsis;
 	private Ratings ratings;
 	private Posters posters;
 	private List<Cast> abridged_cast;
 	private List<Cast> abridged_directors;
 	private List<String> genres;
+	private List<Review> reviews;
 	
 	public long getId() {
 		return id;
@@ -34,12 +35,12 @@ public class Movie implements Serializable{
 	public void setYear(long year) {
 		this.year = year;
 	}
-//	public Integer getRuntime() {
-//		return runtime;
-//	}
-//	public void setRuntime(Integer runtime) {
-//		this.runtime = runtime;
-//	}
+	public String getRuntime() {
+		return runtime;
+	}
+	public void setRuntime(String runtime) {
+		this.runtime = runtime;
+	}
 	public String getSynopsis() {
 		return synopsis;
 	}
@@ -75,6 +76,12 @@ public class Movie implements Serializable{
 	}
 	public List<String> getGenres() {
 		return genres;
+	}
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	public List<Review> getReviews() {
+		return reviews;
 	}
 	
 }

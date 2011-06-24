@@ -70,9 +70,9 @@ public class SubListPod extends LinearLayout {
 //		if(castAdapter.getCount() >= 3) 
 //			params = new LayoutParams(LayoutParams.WRAP_CONTENT, 3*65);
 //		else
-			params = new LayoutParams(LayoutParams.MATCH_PARENT, castAdapter.getCount() * 45);
+			//params = new LayoutParams(LayoutParams.MATCH_PARENT, castAdapter.getCount() * 45);
 			
-		castListView.setLayoutParams(params);
+		//castListView.setLayoutParams(params);
 	}
 
 	

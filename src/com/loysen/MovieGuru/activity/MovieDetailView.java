@@ -1,21 +1,42 @@
 package com.loysen.MovieGuru.activity;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.github.droidfu.widgets.WebImageView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.loysen.MovieGuru.adapter.CastArrayAdapter;
+import com.loysen.MovieGuru.adapter.MergeAdapter;
 import com.loysen.MovieGuru.components.SubListPod;
+import com.loysen.MovieGuru.delegate.RottenTomatoesDelegate;
 import com.loysen.MovieGuru.model.Cast;
 import com.loysen.MovieGuru.model.Movie;
+import com.loysen.MovieGuru.model.Review;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ListActivity;
+import android.app.ProgressDialog;
+import android.database.MergeCursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class MovieDetailView extends Activity {
+public class MovieDetailView extends ListActivity {
+	
+	private static final int PROGRESS_DIALOG_ID = 0;
 
+	private MergeAdapter mergeAdapter;
+	
 	private WebImageView detailImage;
 	private SubListPod castSection;
 	private SubListPod directorSection;
@@ -25,6 +46,7 @@ public class MovieDetailView extends Activity {
 	private TextView criticDetailText;
 	private TextView audienceDetailText;
 	private TextView genreDetailText;
+	private TextView runtimeDetailText;
 	
 	private Movie movie;
 	
@@ -32,26 +54,29 @@ public class MovieDetailView extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		this.setContentView(R.layout.movie_detail_layout);
 		
 		initLayout();
 		
 		handleExtras();
 		
-		setData();
-		
 	}
 	
 	private void initLayout() {
+		
+		View header = (View)getLayoutInflater().inflate(R.layout.movie_info_section, null);
+		header.setEnabled(false);
+		getListView().addHeaderView(header);
+		
 		detailImage = (WebImageView) this.findViewById(R.id.detailImage);
-		castSection = (SubListPod) this.findViewById(R.id.castDetailPod);
-		directorSection = (SubListPod) this.findViewById(R.id.directorDetailPod);
 		
 		titleDetailText = (TextView) this.findViewById(R.id.titleDetailText);
 		synopsisDetailText = (TextView) this.findViewById(R.id.synopsisDetailText);
 		criticDetailText = (TextView) this.findViewById(R.id.criticDetailText);
 		audienceDetailText = (TextView) this.findViewById(R.id.audienceDetailText);
 		genreDetailText = (TextView) this.findViewById(R.id.genreDetailText);
+		runtimeDetailText = (TextView) this.findViewById(R.id.genreDetailText);
+		
+		mergeAdapter = new MergeAdapter();
 		
 	}
 	
@@ -61,24 +86,28 @@ public class MovieDetailView extends Activity {
 		if(extras == null)
 			return;
 		
-		movie = (Movie) extras.get("movie");
+		Movie movie = (Movie) extras.get("movie");
+		
+		new GetMovieInfoTask().execute(movie.getId());
 	}
 	
-	private void setData() {
+	private void setData(Movie movie) {
+		this.movie = movie;
 		detailImage.setImageUrl(movie.getPosters().getProfile());
 		detailImage.loadImage();
 		titleDetailText.setText(movie.getTitle());
 		synopsisDetailText.setText(movie.getSynopsis());
 		criticDetailText.setText(movie.getRatings().getCritics_score() + "%");
 		audienceDetailText.setText(movie.getRatings().getAudience_score() + "%");
+		runtimeDetailText.setText(movie.getRuntime());
 		
-		if(movie.getAbridged_cast() == null)
-			movie.setAbridged_cast(new ArrayList<Cast>());
-		castSection.setCastAdapter(new CastArrayAdapter(this, 0, movie.getAbridged_cast()));
+		mergeAdapter.addView(createListDivider("Cast and Crew:"));
 		
-		if(movie.getAbridged_directors() == null)
-			movie.setAbridged_directors(new ArrayList<Cast>());
-		directorSection.setCastAdapter(new CastArrayAdapter(this, 0, movie.getAbridged_directors()));
+		mergeAdapter.addAdapter(new CastArrayAdapter(this, 0, movie.getAbridged_cast()));
+		
+		mergeAdapter.addView(createListDivider("Director(s):"));
+		
+		mergeAdapter.addAdapter(new CastArrayAdapter(this, 0, movie.getAbridged_directors()));
 		
 		if(movie.getGenres() != null) {
 			String genreLabel = "";
@@ -89,6 +118,86 @@ public class MovieDetailView extends Activity {
 			} 
 			genreDetailText.setText(genreLabel);
 		}
+		
+		this.setListAdapter(mergeAdapter);
+		
+	}
+	
+	private TextView createListDivider(String label) {
+		TextView view = new TextView(this);
+		
+		view.setText(label);
+		
+		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		
+		view.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.divider));
+		
+		return view;
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+
+		switch(id) {
+			case PROGRESS_DIALOG_ID:
+				ProgressDialog dialog = new ProgressDialog(this);
+				dialog.setMessage("Loading");
+				dialog.setCancelable(false);
+				return dialog;
+			default:
+				return null;
+		}
+	}
+	
+	private class GetMovieInfoTask extends AsyncTask<Long, Integer, Movie> {
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			showDialog(PROGRESS_DIALOG_ID);
+			
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Movie doInBackground(Long... params) {
+			Movie movie = null;
+			
+			RottenTomatoesDelegate delegate = new RottenTomatoesDelegate();
+			GsonBuilder builder = new GsonBuilder();
+			
+			builder.setDateFormat("yyyy-dd-MM");
+			
+			Gson gson = builder.create();
+			
+			if(params != null && params.length != 0) {
+				String movieJson = delegate.getMovieInfo(params[0]);
+				
+				movie = gson.fromJson(movieJson, Movie.class);
+				
+				String reviewJson = delegate.getMovieReviews(params[0]);
+				
+				Type targetType = new TypeToken<Collection<Review>>() {}.getType();
+				Collection<Review> objectList = gson.fromJson(reviewJson, targetType);
+				
+				movie.setReviews((List<Review>) objectList);
+				
+			} else {
+				Log.e("MovieDetailView", "GetMovieInfoTask not provided with Movie ID");
+			}
+			
+			
+			return movie;
+		}
+		
+		@Override
+		protected void onPostExecute(Movie result) {
+			// TODO Auto-generated method stub
+			dismissDialog(PROGRESS_DIALOG_ID);
+			setData(result);
+			super.onPostExecute(result);
+		}
+		
 	}
 	
 }
