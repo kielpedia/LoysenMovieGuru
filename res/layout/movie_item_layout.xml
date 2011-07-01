@@ -15,18 +15,14 @@
     	android:layout_toRightOf="@id/webImage"
     	android:textAppearance="?android:attr/textAppearanceMedium"
     	android:layout_width="wrap_content" 
+    	android:padding="2px"
     	android:layout_height="wrap_content"
-    	android:layout_toLeftOf="@+id/audienceLabel"/>
-    <TextView android:id="@+id/criticLabel"
-   		android:text="Critics:"
-    	android:textAppearance="?android:attr/textAppearanceSmall" 
-    	android:layout_height="wrap_content" 
-    	android:layout_width="wrap_content" 
     	android:layout_toLeftOf="@+id/criticText"/>
     <TextView android:id="@id/criticText" 
-    	android:textAppearance="?android:attr/textAppearanceSmall" 
+    	android:textAppearance="?android:attr/textAppearanceMedium" 
     	android:layout_height="wrap_content" 
     	android:layout_width="wrap_content" 
-    	android:layout_alignParentRight="true"/>
-    
+    	android:layout_alignParentRight="true"
+    	android:layout_alignParentTop="true"
+	/>    
 </RelativeLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <TextView android:id="@+id/reviewerItem" 
+    	android:text="TextView" 
+    	android:layout_width="wrap_content" 
+    	android:textAppearance="?android:attr/textAppearanceMedium" 
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentLeft="true"/>
+    	
+    <TextView android:id="@+id/publicationItem" 
+    	android:text="TextView" 
+    	android:layout_width="wrap_content" 
+    	android:textAppearance="?android:attr/textAppearanceSmall" 
+    	android:layout_height="wrap_content" 
+    	android:layout_below="@+id/reviewerItem"
+		android:layout_alignLeft="@+id/reviewerItem"/>
+   
+    <TextView android:id="@+id/dateItem" 
+    	android:text="TextView" 
+    	android:layout_width="wrap_content" 
+    	android:textAppearance="?android:attr/textAppearanceSmall" 
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentRight="true"
+    	android:layout_alignBottom="@+id/reviewerItem"/>
+    	
+    <TextView android:id="@+id/reviewItem" 
+    	android:text="TextView" 
+    	android:layout_width="wrap_content" 
+    	android:textAppearance="?android:attr/textAppearanceSmall" 
+    	android:layout_height="wrap_content" 
+    	android:layout_below="@+id/publicationItem" 
+    	android:layout_alignLeft="@+id/publicationItem"/>
+    
+</RelativeLayout>

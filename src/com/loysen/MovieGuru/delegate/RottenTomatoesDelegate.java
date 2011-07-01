@@ -16,7 +16,8 @@ import org.json.JSONObject;
 
 public class RottenTomatoesDelegate {
 
-	private static final String CURRENT_SHOWINGS = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json";
+	private static final String OPENING_SHOWINGS = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/opening.json";
+	private static final String CURRENT_SHOWINGS = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/in_theaters.json";
 	private static final String MOVIE_BASE = "http://api.rottentomatoes.com/api/public/v1.0/movies/";
 	
 	private static final String RT_API_KEY = "e65q9n29mpqxsmq6dpj2qazc";
@@ -27,7 +28,44 @@ public class RottenTomatoesDelegate {
 		
 		HttpClient client = new DefaultHttpClient();
 		
-		String request = CURRENT_SHOWINGS + "?apiKey=" + RT_API_KEY;
+		String request = CURRENT_SHOWINGS + "?apiKey=" + RT_API_KEY;// + "&page_limit=1";
+		
+		HttpGet httpGet = new HttpGet(request);
+		
+		try {
+			HttpResponse response = client.execute(httpGet);
+			BufferedReader in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+			String line = "";
+			while((line = in.readLine()) != null){
+				json += line;
+			}
+			
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			jsonObject = new JSONObject(json);
+			json = jsonObject.getJSONArray("movies").toString();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return json;
+	}
+	
+	public String getOpeningShowings() {
+		String json = "";
+		JSONObject jsonObject = null;
+		
+		HttpClient client = new DefaultHttpClient();
+		
+		String request = OPENING_SHOWINGS + "?apiKey=" + RT_API_KEY;
 		
 		HttpGet httpGet = new HttpGet(request);
 		

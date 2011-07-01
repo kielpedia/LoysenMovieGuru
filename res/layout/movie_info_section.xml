@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	  xmlns:android="http://schemas.android.com/apk/res/android"
+	  xmlns:droidfu="http://github.com/droidfu/schema"
+	  android:layout_width="match_parent"
+	  android:layout_height="match_parent"
+	  android:padding="5px"
+	  android:background="#000000"
+	  >
+	  
+	  		
+	  	<com.github.droidfu.widgets.WebImageView android:id="@+id/detailImage"
+		  	android:layout_width="120dip"
+		    android:layout_height="180dip"
+		    droidfu:autoLoad="true"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignParentTop="true"
+		    android:padding="5px"
+		  	/>
+	  	
+	  	<TextView android:id="@+id/synopsisDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_alignParentTop="true"
+	  		android:layout_toRightOf="@id/detailImage"
+	  		android:layout_alignBottom="@id/detailImage"
+	  		android:textColor="@color/divider_text"/>
+	  		
+	  	<TextView android:id="@+id/criticDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/detailImage"
+	  		android:layout_alignParentLeft="true"
+	  		android:text="Critics: "
+	  		android:textColor="@color/divider_text"/>
+	  	<TextView android:id="@+id/criticDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_toRightOf="@id/criticDetailLabel"
+	  		android:layout_alignTop="@id/criticDetailLabel"
+	  		android:paddingRight="20px"
+	  		android:textColor="@color/divider_text"/>
+	  		
+	  	<TextView android:id="@+id/audienceDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_toRightOf="@id/criticDetailText"
+	  		android:layout_below="@id/detailImage"
+	  		android:text="Audience: "
+	  		android:textColor="@color/divider_text"/>
+	  		
+	  	<TextView android:id="@+id/audienceDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_alignTop="@id/audienceDetailLabel"
+	  		android:layout_toRightOf="@id/audienceDetailLabel"
+	  		android:textColor="@color/divider_text"/>
+	  		
+	  	<TextView android:id="@+id/yearDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/criticDetailLabel"
+	  		android:text="Year: "
+	  		android:textColor="@color/divider_text"/>
+	  	
+	  	<TextView android:id="@+id/yearDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_alignTop="@id/yearDetailLabel"
+	  		android:layout_toRightOf="@id/yearDetailLabel"
+	  		android:textColor="@color/divider_text"/>
+	  		
+	  	<TextView android:id="@+id/runtimeDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/audienceDetailLabel"
+	  		android:layout_alignLeft="@id/audienceDetailLabel"
+	  		android:text="Runtime: "
+	  		android:textColor="@color/divider_text"/>
+	  	
+	  	<TextView android:id="@+id/runtimeDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_alignTop="@id/runtimeDetailLabel"
+	  		android:layout_toRightOf="@id/runtimeDetailLabel"
+	  		android:textColor="@color/divider_text"/>
+	  		
+	  	<TextView android:id="@+id/genreDetailLabel"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_below="@id/runtimeDetailLabel"
+	  		android:text="Genre: "
+	  		android:textColor="@color/divider_text"/>
+	  	
+	  	<TextView android:id="@+id/genreDetailText"
+	  		android:layout_width="wrap_content"
+	  		android:layout_height="wrap_content"
+	  		android:layout_alignTop="@id/genreDetailLabel"
+	  		android:layout_toRightOf="@id/genreDetailLabel"
+	  		android:textColor="@color/divider_text"/>
+	  			
+		
+	  		
+</RelativeLayout>
