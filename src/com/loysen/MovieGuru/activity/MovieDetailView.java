@@ -11,6 +11,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.loysen.MovieGuru.adapter.CastArrayAdapter;
 import com.loysen.MovieGuru.adapter.MergeAdapter;
+import com.loysen.MovieGuru.adapter.ReviewArrayAdapter;
 import com.loysen.MovieGuru.components.SubListPod;
 import com.loysen.MovieGuru.delegate.RottenTomatoesDelegate;
 import com.loysen.MovieGuru.model.Cast;
@@ -38,15 +39,14 @@ public class MovieDetailView extends ListActivity {
 	private MergeAdapter mergeAdapter;
 	
 	private WebImageView detailImage;
-	private SubListPod castSection;
-	private SubListPod directorSection;
 	
-	private TextView titleDetailText;
 	private TextView synopsisDetailText;
 	private TextView criticDetailText;
 	private TextView audienceDetailText;
 	private TextView genreDetailText;
 	private TextView runtimeDetailText;
+	private TextView movieDetailHeader;
+	private TextView yearDetailText;
 	
 	private Movie movie;
 	
@@ -54,6 +54,7 @@ public class MovieDetailView extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.movie_detail_layout);
 		
 		initLayout();
 		
@@ -69,14 +70,16 @@ public class MovieDetailView extends ListActivity {
 		
 		detailImage = (WebImageView) this.findViewById(R.id.detailImage);
 		
-		titleDetailText = (TextView) this.findViewById(R.id.titleDetailText);
 		synopsisDetailText = (TextView) this.findViewById(R.id.synopsisDetailText);
 		criticDetailText = (TextView) this.findViewById(R.id.criticDetailText);
 		audienceDetailText = (TextView) this.findViewById(R.id.audienceDetailText);
 		genreDetailText = (TextView) this.findViewById(R.id.genreDetailText);
-		runtimeDetailText = (TextView) this.findViewById(R.id.genreDetailText);
+		runtimeDetailText = (TextView) this.findViewById(R.id.runtimeDetailText);
+		yearDetailText = (TextView) this.findViewById(R.id.yearDetailText);
 		
-		mergeAdapter = new MergeAdapter();
+		movieDetailHeader = (TextView) this.findViewById(R.id.screenName);
+		
+		
 		
 	}
 	
@@ -88,6 +91,8 @@ public class MovieDetailView extends ListActivity {
 		
 		Movie movie = (Movie) extras.get("movie");
 		
+		movieDetailHeader.setText(movie.getTitle());
+		
 		new GetMovieInfoTask().execute(movie.getId());
 	}
 	
@@ -95,19 +100,26 @@ public class MovieDetailView extends ListActivity {
 		this.movie = movie;
 		detailImage.setImageUrl(movie.getPosters().getProfile());
 		detailImage.loadImage();
-		titleDetailText.setText(movie.getTitle());
 		synopsisDetailText.setText(movie.getSynopsis());
 		criticDetailText.setText(movie.getRatings().getCritics_score() + "%");
 		audienceDetailText.setText(movie.getRatings().getAudience_score() + "%");
-		runtimeDetailText.setText(movie.getRuntime());
+		runtimeDetailText.setText(parseRuntime(movie.getRuntime()));
+		yearDetailText.setText(movie.getYear());
+		
+		mergeAdapter = new MergeAdapter();
 		
 		mergeAdapter.addView(createListDivider("Cast and Crew:"));
+		
 		
 		mergeAdapter.addAdapter(new CastArrayAdapter(this, 0, movie.getAbridged_cast()));
 		
 		mergeAdapter.addView(createListDivider("Director(s):"));
 		
 		mergeAdapter.addAdapter(new CastArrayAdapter(this, 0, movie.getAbridged_directors()));
+		
+		mergeAdapter.addView(createListDivider("Reviews: "));
+		
+		mergeAdapter.addAdapter(new ReviewArrayAdapter(this, 0, movie.getReviews()));
 		
 		if(movie.getGenres() != null) {
 			String genreLabel = "";
@@ -123,6 +135,20 @@ public class MovieDetailView extends ListActivity {
 		
 	}
 	
+	private String parseRuntime(String runtime) {
+		String formattedRuntime = "";
+		
+		double rawTime = Double.parseDouble(runtime);
+		
+		int hours = (int) (rawTime / 60);
+		
+		int minutes = (int) (rawTime % 60);
+		
+		formattedRuntime += hours + "h " + minutes + "m";
+		
+		return formattedRuntime;
+	}
+	
 	private TextView createListDivider(String label) {
 		TextView view = new TextView(this);
 		
@@ -131,6 +157,7 @@ public class MovieDetailView extends ListActivity {
 		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		
 		view.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.divider));
+		view.setTextColor(getResources().getColor(R.color.divider_text));
 		
 		return view;
 	}
@@ -154,7 +181,7 @@ public class MovieDetailView extends ListActivity {
 		@Override
 		protected void onPreExecute() {
 			// TODO Auto-generated method stub
-			showDialog(PROGRESS_DIALOG_ID);
+//			showDialog(PROGRESS_DIALOG_ID);
 			
 			super.onPreExecute();
 		}
@@ -193,7 +220,7 @@ public class MovieDetailView extends ListActivity {
 		@Override
 		protected void onPostExecute(Movie result) {
 			// TODO Auto-generated method stub
-			dismissDialog(PROGRESS_DIALOG_ID);
+		//	dismissDialog(PROGRESS_DIALOG_ID);
 			setData(result);
 			super.onPostExecute(result);
 		}

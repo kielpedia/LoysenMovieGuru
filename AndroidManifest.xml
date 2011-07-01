@@ -6,7 +6,7 @@
 
   <application android:icon="@drawable/icon" android:label="@string/app_name"
   	android:theme="@android:style/Theme.NoTitleBar">
-    <activity android:name=".CurrentShowingsView">
+    <activity android:name=".MainNavigationView">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
@@ -14,6 +14,10 @@
     </activity>
     
     <activity android:name=".MovieDetailView" />
+    
+    <activity android:name=".OpeningListView" />
+    
+    <activity android:name=".TheatreListView" />
   </application>
 
 </manifest>

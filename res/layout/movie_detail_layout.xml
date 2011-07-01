@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView 
+<RelativeLayout 
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:droidfu="http://github.com/droidfu/schema"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
-	  		
-</ListView>
+	<include android:id="@+id/movieDetailHeader"
+		layout="@layout/header"/>
+	<ListView 
+		android:id="@android:id/list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@id/movieDetailHeader"/>
+	<include android:id="@android:id/empty" 
+		layout="@layout/loading_layout"/>
+	
+</RelativeLayout>

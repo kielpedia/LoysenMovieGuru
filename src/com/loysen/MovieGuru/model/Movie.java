@@ -7,7 +7,7 @@ public class Movie implements Serializable{
 	
 	private long id;
 	private String title;
-	private long year;
+	private String year;
 	private String runtime;
 	private String synopsis;
 	private Ratings ratings;
@@ -29,10 +29,10 @@ public class Movie implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public long getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(long year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	public String getRuntime() {
