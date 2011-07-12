@@ -27,6 +27,8 @@ containing a value of this type.
         public static final int divider=0x7f020000;
         public static final int header=0x7f020001;
         public static final int icon=0x7f020002;
+        public static final int opening=0x7f020003;
+        public static final int ticket=0x7f020004;
     }
     public static final class id {
         public static final int appName=0x7f060004;
@@ -55,6 +57,9 @@ containing a value of this type.
         public static final int runtimeDetailText=0x7f060015;
         public static final int screenName=0x7f060005;
         public static final int searchButton=0x7f06000a;
+        public static final int searchHeader=0x7f060020;
+        public static final int searchText=0x7f060021;
+        public static final int searchViewButton=0x7f060022;
         public static final int synopsisDetailText=0x7f06000d;
         public static final int theatreButton=0x7f060007;
         public static final int titleText=0x7f060019;
@@ -65,14 +70,16 @@ containing a value of this type.
     public static final class layout {
         public static final int cast_item_layout=0x7f030000;
         public static final int cast_pod=0x7f030001;
-        public static final int header=0x7f030002;
-        public static final int loading_layout=0x7f030003;
-        public static final int main_navigation=0x7f030004;
-        public static final int movie_detail_layout=0x7f030005;
-        public static final int movie_info_section=0x7f030006;
-        public static final int movie_item_layout=0x7f030007;
-        public static final int movie_list=0x7f030008;
-        public static final int review_item=0x7f030009;
+        public static final int empty_search=0x7f030002;
+        public static final int header=0x7f030003;
+        public static final int loading_layout=0x7f030004;
+        public static final int main_navigation=0x7f030005;
+        public static final int movie_detail_layout=0x7f030006;
+        public static final int movie_info_section=0x7f030007;
+        public static final int movie_item_layout=0x7f030008;
+        public static final int movie_list=0x7f030009;
+        public static final int review_item=0x7f03000a;
+        public static final int search=0x7f03000b;
     }
     public static final class string {
         public static final int app_name=0x7f040001;
