@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <include android:id="@+id/searchHeader"
+		layout="@layout/header"/>
+	<EditText android:id="@+id/searchText" 
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_below="@id/searchHeader"
+		android:hint="Enter Search Text..."
+		android:layout_alignParentLeft="true"
+		android:layout_toLeftOf="@+id/searchViewButton"
+		android:maxLines="1">
+		<requestFocus />
+	</EditText>
+	<Button android:id="@id/searchViewButton"
+		android:text="Search"
+		android:layout_width="wrap_content" 
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_below="@id/searchHeader"
+	/>
+	<ListView 
+		android:id="@android:id/list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@id/searchText"/>
+		
+	<include android:id="@android:id/empty" 
+		layout="@layout/empty_search"/>
+		
+</RelativeLayout>
