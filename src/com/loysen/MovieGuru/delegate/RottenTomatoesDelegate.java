@@ -160,4 +160,14 @@ public class RottenTomatoesDelegate {
 
 		return json;
 	}
+
+	public String getNewDVDList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String search(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
