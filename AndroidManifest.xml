@@ -23,6 +23,6 @@
     
     <activity android:name=".NewDVDListView" />
   </application>
-
+ 
 </manifest>
 
