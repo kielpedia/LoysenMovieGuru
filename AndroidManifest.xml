@@ -18,6 +18,10 @@
     <activity android:name=".OpeningListView" />
     
     <activity android:name=".TheatreListView" />
+    
+    <activity android:name=".SearchView" />
+    
+    <activity android:name=".NewDVDListView" />
   </application>
 
 </manifest>

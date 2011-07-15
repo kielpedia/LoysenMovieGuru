@@ -11,6 +11,8 @@ public class MainNavigationView extends Activity implements OnClickListener{
 	
 	private Button theatreButton;
 	private Button openingButton;
+	private Button searchButton;
+	private Button dvdButton;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +22,14 @@ public class MainNavigationView extends Activity implements OnClickListener{
 		
 		theatreButton = (Button) this.findViewById(R.id.theatreButton);
 		openingButton = (Button) this.findViewById(R.id.openingButton);
+		searchButton = (Button) this.findViewById(R.id.searchButton);
+		dvdButton = (Button) this.findViewById(R.id.dvdReleaseButton);
+		
 		
 		theatreButton.setOnClickListener(this);
 		openingButton.setOnClickListener(this);
+		searchButton.setOnClickListener(this);
+		dvdButton.setOnClickListener(this);
 	}
 
 	@Override
@@ -34,6 +41,12 @@ public class MainNavigationView extends Activity implements OnClickListener{
 			case R.id.openingButton:
 				startOpeningActivity();
 				break;
+			case R.id.searchButton:
+				startSearchActivity();
+				break;
+			case R.id.dvdReleaseButton:
+				startDVDActivity();
+				break;
 		}
 	}
 
@@ -44,6 +57,16 @@ public class MainNavigationView extends Activity implements OnClickListener{
 
 	private void startTheatreActivity() {
 		Intent intent = new Intent(this, TheatreListView.class);
+		startActivity(intent);
+	}
+	
+	private void startSearchActivity() {
+		Intent intent = new Intent(this, SearchView.class);
+		startActivity(intent);
+	}
+
+	private void startDVDActivity() {
+		Intent intent = new Intent(this, NewDVDListView.class);
 		startActivity(intent);
 	}
 
